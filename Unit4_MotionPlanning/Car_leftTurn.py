@@ -1,112 +1,69 @@
 # ----------
 # User Instructions:
 # 
-# Create a function compute_value which returns
-# a grid of values. The value of a cell is the minimum
-# number of moves required to get from the cell to the goal. 
+# Implement the function optimum_policy2D below.
 #
-# If a cell is a wall or it is impossible to reach the goal from a cell,
-# assign that cell a value of 99.
+# You are given a car in grid with initial state
+# init. Your task is to compute and return the car's 
+# optimal path to the position specified in goal; 
+# the costs for each motion are as defined in cost.
+#
+# There are four motion directions: up, left, down, and right.
+# Increasing the index in this array corresponds to making a
+# a left turn, and decreasing the index corresponds to making a 
+# right turn.
+
+forward = [[-1,  0], # go up
+           [ 0, -1], # go left
+           [ 1,  0], # go down
+           [ 0,  1]] # go right
+forward_name = ['up', 'left', 'down', 'right']
+
+# action has 3 values: right turn, no turn, left turn
+action = [-1, 0, 1]
+action_name = ['R', '#', 'L']
+
+# EXAMPLE INPUTS:
+# grid format:
+#     0 = navigable space
+#     1 = unnavigable space 
+grid = [[1, 1, 1, 0, 0, 0],
+        [1, 1, 1, 0, 1, 0],
+        [0, 0, 0, 0, 0, 0],
+        [1, 1, 1, 0, 1, 1],
+        [1, 1, 1, 0, 1, 1]]
+
+init = [4, 3, 0] # given in the form [row,col,direction]
+                 # direction = 0: up
+                 #             1: left
+                 #             2: down
+                 #             3: right
+                
+goal = [2, 0] # given in the form [row,col]
+
+cost = [2, 1, 20] # cost has 3 values, corresponding to making 
+                  # a right turn, no turn, and a left turn
+
+# EXAMPLE OUTPUT:
+# calling optimum_policy2D with the given parameters should return 
+# [[' ', ' ', ' ', 'R', '#', 'R'],
+#  [' ', ' ', ' ', '#', ' ', '#'],
+#  ['*', '#', '#', '#', '#', 'R'],
+#  [' ', ' ', ' ', '#', ' ', ' '],
+#  [' ', ' ', ' ', '#', ' ', ' ']]
 # ----------
-from util import Stack, Queue, PriorityQueue
 
-grid = [[0, 1, 0, 0, 0, 0],
-        [0, 1, 0, 0, 0, 0],
-        [0, 1, 0, 0, 0, 0],
-        [0, 1, 0, 0, 0, 0],
-        [0, 0, 0, 0, 1, 0]]
-goal = [len(grid)-1, len(grid[0])-1]
-cost = 1 # the cost associated with moving from a cell to an adjacent one
+# ----------------------------------------
+# modify code below
+# ----------------------------------------
 
-delta = [[-1, 0 ], # go up
-         [ 0, -1], # go left
-         [ 1, 0 ], # go down
-         [ 0, 1 ]] # go right
-
-delta_name = ['^', '<', 'v', '>']
-
-def print_maze(grid):
-    for e in grid:
-        print e
-
-def compute_policy(grid,goal,cost):
-    # ----------------------------------------
-    # insert code below
-    # ----------------------------------------
+def optimum_policy2D(grid,init,goal,cost):
     Nr=len(grid)
     Nc=len(grid[0])
-    inf=99
-    value=[[inf for j in range(Nc)] for i in range(Nr)]
-    policy=[[' ' for j in range(Nc)] for i in range(Nr)]
+    policy2D=[[' ' for j in range(Nc)] for i in range(Nr)]
 
-    locs=[[i,j] for i in range(Nr) for j in range(Nc) if grid[i][j]==0]
+    return policy2D
 
-    Nloc=len(locs)
-
-    visited=[]
-
-    value[goal[0]][goal[1]]=0
-    policy[goal[0]][goal[1]]='*'
-
-    def minlocV(locs):
-        minV=inf
-        idx=0
-        idy=0
-        for loc in locs:
-            if not loc in visited:
-                if minV>value[loc[0]][loc[1]]:
-                    minV=value[loc[0]][loc[1]]
-                    idx,idy=loc
-        if minV==inf:
-            return []
-        else:
-            return [idx, idy]
-
-
-    def childNode(grid, loc, delta, delta_name):
-        child=[]
-        for i in range(len(delta)):
-            move=delta[i]
-            newloc=[loc[0]+move[0], loc[1]+move[1]]
-            if loc[0]+move[0]>=0 and loc[0]+move[0]<Nr \
-            and loc[1]+move[1]>=0 and loc[1]+move[1]<Nc \
-            and grid[newloc[0]][newloc[1]] ==0:
-                child.append([newloc,delta_name[i]])
-        return child
-
-
-    # while not isequal(explored, locs):
-
-    def oppositeMove(move_name):
-        if move_name=='<':
-            return '>'
-        if move_name=='>':
-            return '<'
-        if move_name=='^':
-            return 'v'
-        if move_name=='v':
-            return '^'
-
-
-    while len(visited)!=Nloc:
-        # print 'Here'
-        currentloc=minlocV(locs)
-        if len(currentloc)==0:
-            break
-        visited.append(currentloc)
-
-        for newloc, move_name in childNode(grid, currentloc, delta, delta_name):
-            if not newloc in visited and value[newloc[0]][newloc[1]]>cost+value[currentloc[0]][currentloc[1]]:
-                value[newloc[0]][newloc[1]]=cost+value[currentloc[0]][currentloc[1]]
-                policy[newloc[0]][newloc[1]]=oppositeMove(move_name)
-
-    
-    # make sure your function returns a grid of values as 
-    # demonstrated in the previous video.
-    return policy 
-
-result=compute_policy(grid, goal, cost)
-print 'Policy:'
-print_maze(result)
-print 'Grid:'
-print_maze(grid)
+result=optimum_policy2D(grid, init, goal, cost)
+for row in result:
+    print row
