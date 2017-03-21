@@ -77,8 +77,8 @@ def optimum_policy2D(grid,init,goal,cost):
     Nr=len(grid)
     Nc=len(grid[0])
     inf=999
-    value=[[[inf for j in range(Nc)] for i in range(Nr)] for o in range(4)]
-    policy=[[[' ' for j in range(Nc)] for i in range(Nr)] for o in range(4)]
+    value3D=[[[inf for j in range(Nc)] for i in range(Nr)] for o in range(4)]
+    policy3D=[[[' ' for j in range(Nc)] for i in range(Nr)] for o in range(4)]
     value2D=[[inf for j in range(Nc)] for i in range(Nr)] 
     policy2D=[[' ' for j in range(Nc)] for i in range(Nr)] 
 
@@ -90,21 +90,19 @@ def optimum_policy2D(grid,init,goal,cost):
             for y in range(len(grid[0])):
                 for orientation in range(4):
                     if goal[0] == x and goal[1] == y:
-                        if value[orientation][x][y] > 0:
-                            value[orientation][x][y] = 0
-                            policy[orientation][x][y] = '*'
+                        if value3D[orientation][x][y] > 0:
+                            value3D[orientation][x][y] = 0
+                            policy3D[orientation][x][y] = '*'
                             change = True
                     elif grid[x][y] == 0:
-                        for i in range(3):
-                            o2 = (orientation + action[i]) % 4
-                            x2 = x + forward[o2][0]
-                            y2 = y + forward[o2][1]
-                            if x2 >= 0 and x2 < len(grid) and y2 >= 0 and y2 < len(grid[0]) and grid[x2][y2] == 0:
-                                v2 = value[o2][x2][y2] + cost[i] ## Use value[o2] not value[orientation] !
-                                if v2 < value[orientation][x][y]:
-                                    change = True
-                                    value[orientation][x][y] = v2
-                                    policy[orientation][x][y] = action_name[i]
+
+                        for nextloc, move_name, move_cost in childNode(grid, [x,y,orientation], forward, forward_name):
+                            if value3D[nextloc[2]][nextloc[0]][nextloc[1]]+move_cost<value3D[orientation][x][y]:
+                                value3D[orientation][x][y]=value3D[nextloc[2]][nextloc[0]][nextloc[1]]+move_cost
+                                policy3D[orientation][x][y]=move_name
+   
+                                change=True
+
     # print 'Value:'
     # for i in value:
     #     print '----'
@@ -120,20 +118,19 @@ def optimum_policy2D(grid,init,goal,cost):
     x = init[0]
     y = init[1]
     orientation = init[2]
-    policy2D[x][y] = policy[orientation][x][y]
-    value2D[x][y] = value[orientation][x][y]
-    while policy[orientation][x][y] != '*':
-        if policy[orientation][x][y] == '#':
-            o2 = orientation
-        elif policy[orientation][x][y] == 'R':
-            o2 = (orientation - 1) % 4
-        elif policy[orientation][x][y] == 'L':
-            o2 = (orientation + 1) % 4
+    policy2D[x][y] = policy3D[orientation][x][y]
+    value2D[x][y] = value3D[orientation][x][y]
+    while policy3D[orientation][x][y] != '*':
+        for i in range(len(action)):
+            if policy3D[orientation][x][y] == action_name[i]:
+                o2 = (orientation + action[i]) % 4
+                break
+
         x = x + forward[o2][0]
         y = y + forward[o2][1]
         orientation = o2
-        policy2D[x][y] = policy[orientation][x][y]
-        value2D[x][y] = value[orientation][x][y]
+        policy2D[x][y] = policy3D[orientation][x][y]
+        value2D[x][y] = value3D[orientation][x][y]
     return policy2D, value2D # Make sure your function returns the expected grid.
 
 result1, result2=optimum_policy2D(grid, init, goal, cost)

@@ -74,7 +74,7 @@ def compute_policy(grid,goal,cost):
     
     # make sure your function returns a grid of values as 
     # demonstrated in the previous video.
-    return policy 
+    return 'fail' 
 
 result=compute_policy(grid, goal, cost)
 print 'Policy:'
