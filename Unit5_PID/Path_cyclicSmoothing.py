@@ -208,7 +208,12 @@ import matplotlib.pyplot as plt
 origpath=np.asarray(testpath1)
 smpath=np.asarray(smooth(testpath1))
 
-plt.plot(origpath[:,0], origpath[:,1],'b.-')
-plt.plot(smpath[:,0], smpath[:,1],'r.-')
+plt.plot(origpath[:,0], origpath[:,1],'b.-', label='Original Path')
+plt.plot(smpath[:,0], smpath[:,1],'r.-', label='Smoothed')
+plt.xlim(-1,7)
+plt.ylim(-1,4)
+plt.legend(loc='upper right')
 
 plt.show()
+
+# plt.savefig('../Path_cyclicSmoothing.png',dpi=400)

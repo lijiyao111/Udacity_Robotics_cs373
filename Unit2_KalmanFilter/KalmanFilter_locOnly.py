@@ -17,9 +17,13 @@ def predict(mean1, var1, mean2, var2):
 
 measurements = [5., 6., 7., 9., 10.]
 motion = [1., 1., 2., 1., 1.]
+
+## Measurement and motion uncertainty:
 measurement_sig = 4.
 motion_sig = 2.
-mu = 0.
+
+## Initial location:
+mu = 0. ##
 sig = 10000.
 
 #Please print out ONLY the final values of the mean
@@ -30,4 +34,5 @@ for k in range(len(measurements)):
     mu,sig=update(mu,sig,measurements[k],measurement_sig)
     mu,sig=predict(mu,sig,motion[k],motion_sig)
 
+print('Estimated location with uncertainty:') 
 print([mu, sig])

@@ -8,7 +8,7 @@
 # If a cell is a wall or it is impossible to reach the goal from a cell,
 # assign that cell a value of 99.
 # ----------
-from util import Stack, Queue, PriorityQueue
+from utils import Stack, Queue, PriorityQueue
 
 grid = [[0, 1, 0, 0, 0, 0],
         [0, 1, 0, 0, 0, 0],
@@ -27,7 +27,7 @@ delta_name = ['^', '<', 'v', '>']
 
 def print_maze(grid):
     for e in grid:
-        print e
+        print(e)
 
 def compute_policy(grid,goal,cost):
     # ----------------------------------------
@@ -106,7 +106,7 @@ def compute_policy(grid,goal,cost):
     return policy 
 
 result=compute_policy(grid, goal, cost)
-print 'Policy:'
+print ('Policy:')
 print_maze(result)
-print 'Grid:'
+print ('Grid:')
 print_maze(grid)

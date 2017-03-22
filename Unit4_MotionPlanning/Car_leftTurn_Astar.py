@@ -1,7 +1,7 @@
 # Policy is not correct
 # need to work backward 
 
-from util import PriorityQueue
+from utils import PriorityQueue
 
 forward = [[-1,  0], # go up
            [ 0, -1], # go left
@@ -136,9 +136,9 @@ def optimum_policy2D(grid,init,goal,cost):
                     loc, loc_move=reverse_move(loc, policy3D[loc[2]][loc[0]][loc[1]])
                     policy2D[loc[0]][loc[1]]=loc_move
                     value2D[loc[0]][loc[1]]=value3D[loc[2]][loc[0]][loc[1]]
-                print 'Value'
+                print ('Value')
                 for i in value2D:
-                    print i
+                    print (i)
                 return policy2D
 
 
@@ -150,13 +150,13 @@ def optimum_policy2D(grid,init,goal,cost):
     return 'fail'
 
 result=optimum_policy2D(grid, init, goal, cost)
-print 'Policy:'
+print ('Policy:')
 for row in result:
-    print row
-print 'Grid:'
+    print (row)
+print ('Grid:')
 for row in grid:
-    print row
-print 'Initial status'
-print init
-print 'Goal location'
-print goal
+    print (row)
+print ('Initial status')
+print (init)
+print ('Goal location')
+print (goal)

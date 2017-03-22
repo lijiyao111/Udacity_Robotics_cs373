@@ -115,13 +115,16 @@ collision_cost = 1000
 success_prob = 0.5
 
 value,policy = stochastic_value(grid,goal,cost_step,collision_cost,success_prob)
+print('Value:')
 for row in value:
-    print row
+    print(row)
+print('Policy:')
 for row in policy:
-    print row
+    print(row)
 
+print('Grid:')
 for row in grid:
-    print row
+    print(row)
 
 # Expected outputs:
 #

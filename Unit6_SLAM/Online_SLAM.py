@@ -98,7 +98,7 @@ class matrix:
             dimy = dimx
         # check if valid dimensions
         if dimx < 1 or dimy < 1:
-            raise ValueError, "Invalid size of matrix"
+            raise ValueError("Invalid size of matrix")
         else:
             self.dimx  = dimx
             self.dimy  = dimy
@@ -112,7 +112,7 @@ class matrix:
     def identity(self, dim):
         # check if valid dimension
         if dim < 1:
-            raise ValueError, "Invalid size of matrix"
+            raise ValueError("Invalid size of matrix")
         else:
             self.dimx  = dim
             self.dimy  = dim
@@ -127,8 +127,8 @@ class matrix:
 
     def show(self, txt = ''):
         for i in range(len(self.value)):
-            print txt + '['+ ', '.join('%.3f'%x for x in self.value[i]) + ']' 
-        print ' '
+            print(txt + '['+ ', '.join('%.3f'%x for x in self.value[i]) + ']') 
+        print(' ')
 
     # ------------
     #
@@ -138,7 +138,7 @@ class matrix:
     def __add__(self, other):
         # check if correct dimensions
         if self.dimx != other.dimx or self.dimx != other.dimx:
-            raise ValueError, "Matrices must be of equal dimension to add"
+            raise ValueError("Matrices must be of equal dimension to add")
         else:
             # add if correct dimensions
             res = matrix()
@@ -156,7 +156,7 @@ class matrix:
     def __sub__(self, other):
         # check if correct dimensions
         if self.dimx != other.dimx or self.dimx != other.dimx:
-            raise ValueError, "Matrices must be of equal dimension to subtract"
+            raise ValueError("Matrices must be of equal dimension to subtract")
         else:
             # subtract if correct dimensions
             res = matrix()
@@ -174,7 +174,7 @@ class matrix:
     def __mul__(self, other):
         # check if correct dimensions
         if self.dimy != other.dimx:
-            raise ValueError, "Matrices must be m*n and n*p to multiply"
+            raise ValueError("Matrices must be m*n and n*p to multiply")
         else:
             # multiply if correct dimensions
             res = matrix()
@@ -225,7 +225,7 @@ class matrix:
         if list2 == []:
             list2 = list1
         if len(list1) > self.dimx or len(list2) > self.dimy:
-            raise ValueError, "list invalid in take()"
+            raise ValueError("list invalid in take()")
 
         res = matrix()
         res.zero(len(list1), len(list2))
@@ -261,7 +261,7 @@ class matrix:
         if list2 == []:
             list2 = list1
         if len(list1) > self.dimx or len(list2) > self.dimy:
-            raise ValueError, "list invalid in expand()"
+            raise ValueError("list invalid in expand()")
 
         res = matrix()
         res.zero(dimx, dimy)
@@ -288,7 +288,7 @@ class matrix:
                 res.value[i][i] = 0.0
             else: 
                 if d < 0.0:
-                    raise ValueError, "Matrix not positive-definite"
+                    raise ValueError("Matrix not positive-definite")
                 res.value[i][i] = sqrt(d)
             for j in range(i+1, self.dimx):
                 S = sum([res.value[k][i] * res.value[k][j] for k in range(i)])
@@ -484,9 +484,9 @@ def make_data(N, num_landmarks, world_size, measurement_range, motion_noise,
         # we are done when all landmarks were observed; otherwise re-run
         complete = (sum(seen) == num_landmarks)
 
-    print ' '
-    print 'Landmarks: ', r.landmarks
-    print r
+    print(' ')
+    print('Landmarks: ', r.landmarks)
+    print(r)
 
     return data
     
@@ -624,16 +624,16 @@ def online_slam(data, N, num_landmarks, motion_noise, measurement_noise):
 #
 
 def print_result(N, num_landmarks, result):
-    print
-    print 'Estimated Pose(s):'
+    print()
+    print('Estimated Pose(s):')
     for i in range(N):
-        print '    ['+ ', '.join('%.3f'%x for x in result.value[2*i]) + ', ' \
-            + ', '.join('%.3f'%x for x in result.value[2*i+1]) +']'
-    print 
-    print 'Estimated Landmarks:'
+        print('    ['+ ', '.join('%.3f'%x for x in result.value[2*i]) + ', ' \
+            + ', '.join('%.3f'%x for x in result.value[2*i+1]) +']')
+    print() 
+    print('Estimated Landmarks:')
     for i in range(num_landmarks):
-        print '    ['+ ', '.join('%.3f'%x for x in result.value[2*(N+i)]) + ', ' \
-            + ', '.join('%.3f'%x for x in result.value[2*(N+i)+1]) +']'
+        print('    ['+ ', '.join('%.3f'%x for x in result.value[2*(N+i)]) + ', ' \
+            + ', '.join('%.3f'%x for x in result.value[2*(N+i)+1]) +']')
         
 # ------------------------------------------------------------------------
 #
@@ -672,41 +672,41 @@ distance           = 20.0     # distance by which robot (intends to) move each i
 def solution_check(result, answer_mu, answer_omega):
 
     if len(result) != 2:
-        print "Your function must return TWO matrices, mu and Omega"
+        print("Your function must return TWO matrices, mu and Omega")
         return False
     
     user_mu = result[0]
     user_omega = result[1]
     
     if user_mu.dimx == answer_omega.dimx and user_mu.dimy == answer_omega.dimy:
-        print "It looks like you returned your results in the wrong order. Make sure to return mu then Omega."
+        print ("It looks like you returned your results in the wrong order. Make sure to return mu then Omega.")
         return False
     
     if user_mu.dimx != answer_mu.dimx or user_mu.dimy != answer_mu.dimy:
-        print "Your mu matrix doesn't have the correct dimensions. Mu should be a", answer_mu.dimx, " x ", answer_mu.dimy, "matrix."
+        print ("Your mu matrix doesn't have the correct dimensions. Mu should be a", answer_mu.dimx, " x ", answer_mu.dimy, "matrix.")
         return False
     else:
-        print "Mu has correct dimensions."
+        print ("Mu has correct dimensions.")
         
     if user_omega.dimx != answer_omega.dimx or user_omega.dimy != answer_omega.dimy:
-        print "Your Omega matrix doesn't have the correct dimensions. Omega should be a", answer_omega.dimx, " x ", answer_omega.dimy, "matrix."
+        print ("Your Omega matrix doesn't have the correct dimensions. Omega should be a", answer_omega.dimx, " x ", answer_omega.dimy, "matrix.")
         return False
     else:
-        print "Omega has correct dimensions."
+        print ("Omega has correct dimensions.")
         
     if user_mu != answer_mu:
-        print "Mu has incorrect entries."
+        print ("Mu has incorrect entries.")
         return False
     else:
-        print "Mu correct."
+        print ("Mu correct.")
         
     if user_omega != answer_omega:
-        print "Omega has incorrect entries."
+        print ("Omega has incorrect entries.")
         return False
     else:
-        print "Omega correct."
+        print ("Omega correct.")
         
-    print "Test case passed!"
+    print ("Test case passed!")
     return True
 
 # -----------
@@ -736,9 +736,9 @@ answer_omega1      = matrix([[0.36603773584905663, 0.0, -0.169811320754717, 0.0,
                              [0.0, -0.1811320754716981, 0.0, -0.4056603773584906, 0.0, -0.360377358490566, 0.0, 1.2339622641509433]])
 
 result = online_slam(testdata1, 5, 3, 2.0, 2.0)
-print 'From online SLAM:'
+print ('From online SLAM:')
 print_result(1,3,result[0])
-print 'From SLAM'
+print ('From SLAM')
 print_result(5,3,slam(testdata1, 5, 3, 2.0, 2.0))
 solution_check(result, answer_mu1, answer_omega1)
 

@@ -15,7 +15,7 @@
 #   0 = Navigable space
 #   1 = Occupied space
 
-from util import Queue
+from utils import Queue
 
 grid = [[0, 0, 1, 0, 0, 0],
         [0, 0, 0, 0, 0, 0],
@@ -71,5 +71,5 @@ def search(grid,init,goal,cost):
 
     # return result
 
-print search(grid, init, goal, cost)
+print(search(grid, init, goal, cost))
 

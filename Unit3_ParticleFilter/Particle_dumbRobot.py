@@ -136,7 +136,8 @@ for t in range(T):
             index = (index + 1) % N
         p3.append(p[index])
     p = p3
-    print(eval(myrobot, p))
+    print('Localization error: ',eval(myrobot, p))
+## p contain all particles, average of p will be the estimation of robot status
  
 
 

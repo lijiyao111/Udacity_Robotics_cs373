@@ -15,7 +15,7 @@
 #   0 = Navigable space
 #   1 = Occupied space
 
-from util import PriorityQueue
+from utils import PriorityQueue
 
 # grid = [[0, 1, 0, 0, 0, 0],
 #         [0, 1, 0, 0, 0, 0],
@@ -25,7 +25,7 @@ from util import PriorityQueue
 grid = [[0, 1, 0, 1, 0, 0],
         [0, 1, 0, 1, 0, 0],
         [0, 1, 0, 1, 0, 0],
-        [0, 1, 0, 1, 0, 0],
+        [0, 1, 0, 0, 0, 0],
         [0, 0, 0, 1, 0, 0,]]
 heuristic = [[9, 8, 7, 6, 5, 4],
              [8, 7, 6, 5, 4, 3],
@@ -93,5 +93,5 @@ def search(grid,init,goal,cost):
 
 exp_maze=search(grid, init, goal, cost)
 for row in exp_maze:
-    print row
+    print(row)
 

@@ -86,7 +86,7 @@ class matrix:
             dimy = dimx
         # check if valid dimensions
         if dimx < 1 or dimy < 1:
-            raise ValueError, "Invalid size of matrix"
+            raise ValueError("Invalid size of matrix")
         else:
             self.dimx  = dimx
             self.dimy  = dimy
@@ -100,7 +100,7 @@ class matrix:
     def identity(self, dim):
         # check if valid dimension
         if dim < 1:
-            raise ValueError, "Invalid size of matrix"
+            raise ValueError("Invalid size of matrix")
         else:
             self.dimx  = dim
             self.dimy  = dim
@@ -114,8 +114,8 @@ class matrix:
 
     def show(self, txt = ''):
         for i in range(len(self.value)):
-            print txt + '['+ ', '.join('%.3f'%x for x in self.value[i]) + ']' 
-        print ' '
+            print(txt + '['+ ', '.join('%.3f'%x for x in self.value[i]) + ']') 
+        print(' ')
 
     # ------------
     #
@@ -125,7 +125,7 @@ class matrix:
     def __add__(self, other):
         # check if correct dimensions
         if self.dimx != other.dimx or self.dimx != other.dimx:
-            raise ValueError, "Matrices must be of equal dimension to add"
+            raise ValueError("Matrices must be of equal dimension to add")
         else:
             # add if correct dimensions
             res = matrix()
@@ -143,7 +143,7 @@ class matrix:
     def __sub__(self, other):
         # check if correct dimensions
         if self.dimx != other.dimx or self.dimx != other.dimx:
-            raise ValueError, "Matrices must be of equal dimension to subtract"
+            raise ValueError("Matrices must be of equal dimension to subtract")
         else:
             # subtract if correct dimensions
             res = matrix()
@@ -161,7 +161,7 @@ class matrix:
     def __mul__(self, other):
         # check if correct dimensions
         if self.dimy != other.dimx:
-            raise ValueError, "Matrices must be m*n and n*p to multiply"
+            raise ValueError("Matrices must be m*n and n*p to multiply")
         else:
             # multiply if correct dimensions
             res = matrix()
@@ -214,7 +214,7 @@ class matrix:
         if list2 == []:
             list2 = list1
         if len(list1) > self.dimx or len(list2) > self.dimy:
-            raise ValueError, "list invalid in take()"
+            raise ValueError("list invalid in take()")
 
         res = matrix()
         res.zero(len(list1), len(list2))
@@ -250,7 +250,7 @@ class matrix:
         if list2 == []:
             list2 = list1
         if len(list1) > self.dimx or len(list2) > self.dimy:
-            raise ValueError, "list invalid in expand()"
+            raise ValueError("list invalid in expand()")
 
         res = matrix()
         res.zero(dimx, dimy)
@@ -278,7 +278,7 @@ class matrix:
                 res.value[i][i] = 0.0
             else: 
                 if d < 0.0:
-                    raise ValueError, "Matrix not positive-definite"
+                    raise ValueError("Matrix not positive-definite")
                 res.value[i][i] = sqrt(d)
             for j in range(i+1, self.dimx):
                 S = sum([res.value[k][i] * res.value[k][j] for k in range(i)])
@@ -470,9 +470,9 @@ def make_data(N, num_landmarks, world_size, measurement_range, motion_noise,
         # we are done when all landmarks were observed; otherwise re-run
         complete = (sum(seen) == num_landmarks)
 
-    print ' '
-    print 'Landmarks: ', r.landmarks
-    print r
+    print(' ')
+    print('Landmarks: ', r.landmarks)
+    print(r)
 
 
     return data
@@ -485,16 +485,16 @@ def make_data(N, num_landmarks, world_size, measurement_range, motion_noise,
 #
 
 def print_result(N, num_landmarks, result):
-    print
-    print 'Estimated Pose(s):'
+    print()
+    print('Estimated Pose(s):')
     for i in range(N):
-        print '    ['+ ', '.join('%.3f'%x for x in result.value[2*i]) + ', ' \
-            + ', '.join('%.3f'%x for x in result.value[2*i+1]) +']'
-    print
-    print 'Estimated Landmarks:'
+        print('    ['+ ', '.join('%.3f'%x for x in result.value[2*i]) + ', ' \
+            + ', '.join('%.3f'%x for x in result.value[2*i+1]) +']')
+    print()
+    print('Estimated Landmarks:')
     for i in range(num_landmarks):
-        print '    ['+ ', '.join('%.3f'%x for x in result.value[2*(N+i)]) + ', ' \
-            + ', '.join('%.3f'%x for x in result.value[2*(N+i)+1]) +']'
+        print('    ['+ ', '.join('%.3f'%x for x in result.value[2*(N+i)]) + ', ' \
+            + ', '.join('%.3f'%x for x in result.value[2*(N+i)+1]) +']')
 
 # --------------------------------
 #

@@ -156,8 +156,10 @@ def filter(x, P):
         x = x + (K * y)
         P = (I - (K * H)) * P
     
+    print('x (Location and Velocity): ')
     print('x= ')
     x.show()
+    print('P (Covariance Matrix): ')
     print('P= ')
     P.show()
 

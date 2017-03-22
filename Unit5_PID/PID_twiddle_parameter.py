@@ -182,9 +182,15 @@ params = twiddle()
 print('Best parameters:',params)
 robot = make_robot()
 x_trajectory, y_trajectory, err = run(robot, params)
+robot2 = make_robot()
+params_user=[2,4,0.1]
+x2_trajectory, y2_trajectory, err2 = run(robot2, params_user)
 n = len(x_trajectory)
 
-plt.plot(x_trajectory, y_trajectory, 'g', label='twiddle PID controller')
+plt.plot(x_trajectory, y_trajectory, 'g', label='PID controller with twiddle parameters')
+plt.plot(x2_trajectory, y2_trajectory, 'b', label='PID controller with [2, 4, 0.1]')
 plt.plot(x_trajectory, np.zeros(n), 'r', label='reference')
 plt.legend()
-plt.show()
+# plt.show()
+
+plt.savefig('../PID_twiddle.pdf',format='pdf',dpi=400)

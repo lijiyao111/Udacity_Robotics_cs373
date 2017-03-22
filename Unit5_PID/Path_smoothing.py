@@ -63,7 +63,12 @@ import matplotlib.pyplot as plt
 npath=np.asarray(path)
 nspath=np.asarray(spath)
 print(npath)
-plt.plot(npath[:,0],npath[:,1],'-')
-plt.plot(nspath[:,0],nspath[:,1],'-')
+plt.plot(npath[:,0],npath[:,1],'b.-', label='Original Path')
+plt.plot(nspath[:,0],nspath[:,1],'r.-',  label='Smoothed')
+plt.legend(loc='lower right')
+plt.xlim(-0.5,4.5)
+plt.ylim(-0.5,4.5)
 plt.show()
+
+# plt.savefig('../Path_smoothing.png',dpi=400)
 

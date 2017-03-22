@@ -9,7 +9,7 @@
 # Make sure that the initial cell in the grid 
 # you return has the value 0.
 # ----------
-from util import Queue
+from utils import Queue
         
 grid = [[0, 0, 1, 0, 0, 0],
         [0, 0, 0, 0, 0, 0],
@@ -68,9 +68,11 @@ def search(grid,init,goal,cost):
 
 exp_maze=search(grid,init,goal,cost)
 if exp_maze=='fail':
-    print exp_maze
+    print(exp_maze)
 else:
+    print('Expanded sequence:')
     for row in exp_maze:
-        print row
+        print(row)
+print('Grid:')
 for row in grid:
-    print row
+    print(row)

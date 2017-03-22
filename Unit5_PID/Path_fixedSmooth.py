@@ -65,9 +65,12 @@ idx=0
 npath1=np.asarray(testpaths[idx])
 nfix1=np.asarray(testfixpts[idx])
 snpath1=np.asarray(smooth(testpaths[idx], testfixpts[idx]))
-plt.plot(npath1[:,0],npath1[:,1],'b.-')
-plt.plot(snpath1[:,0],snpath1[:,1],'r.-')
+plt.plot(npath1[:,0],npath1[:,1],'b.-', label='Original Path')
+plt.plot(snpath1[:,0],snpath1[:,1],'r.-',  label='Smoothed')
+plt.legend(loc='upper right')
 plt.show()
+
+# plt.savefig('../Path_fixedSmoothing.png',dpi=400)
 
 
 

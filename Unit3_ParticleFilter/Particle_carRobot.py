@@ -346,6 +346,7 @@ measurements = [[4.746936, 3.859782, 3.045217, 2.045506],
                [0.194460, 5.660382, 4.761072, 2.471682],
                [5.717342, 4.736780, 3.909599, 2.342536]]
 
+print('Estimated Car status (x, y, orientation):')
 print(particle_filter(motions, measurements))
 
 ## 2) You can generate your own test cases by generating

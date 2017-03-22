@@ -15,7 +15,7 @@
 #   0 = Navigable space
 #   1 = Occupied space
 
-from util import Queue
+from utils import Queue
 
 grid = [[0, 0, 1, 0, 0, 0],
         [0, 0, 0, 0, 0, 0],
@@ -94,8 +94,10 @@ def search(grid,init,goal,cost):
     # return result
 
 exp_maze=search(grid, init, goal, cost)
+print('Path:')
 for row in exp_maze:
-    print row
+    print(row)
+print('Grid:')
 for row in grid:
-    print row
+    print(row)
 

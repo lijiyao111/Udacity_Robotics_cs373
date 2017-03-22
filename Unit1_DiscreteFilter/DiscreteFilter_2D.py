@@ -98,4 +98,6 @@ colors = [['R', 'G'],
 measurements = ['R', 'R', 'G', 'G', 'G', 'R']
 motions = [[0, 0], [-1, 0], [0, 1], [0, -1], [0, 1], [1, 0]]
 p = localize(colors,measurements,motions,sensor_right=0.99, p_move=0.97)
+
+print('Estimated probability at each location:') 
 show(p) # displays your answer

@@ -134,13 +134,13 @@ def optimum_policy2D(grid,init,goal,cost):
     return policy2D, value2D # Make sure your function returns the expected grid.
 
 result1, result2=optimum_policy2D(grid, init, goal, cost)
-print 'Policy:'
+print('Policy:')
 for row in result1:
-    print row
-print 'Value:'
+    print (row)
+print ('Value:')
 for row in result2:
-    print row
+    print (row)
 
-print 'Grid:'
+print ('Grid:')
 for row in grid:
-    print row
+    print (row)
