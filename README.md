@@ -7,10 +7,6 @@ I learned a lot about Robotics from Sebastian's class, especially about some key
 
 Below is a summary of the codes in this repository, which are all the coding assignments for the class. Codes are all written in Python 3. (The original class codes are in Python 2)
 
-1. file name note
-2. PID figure
-3. Search result
-4. SLAM result
 
 # Localization and tracking, Unit 1, 2, 3
 > Unit 1, 2, 3 are all about the Robot localization and tracking, using different filters, including **Histogram filter, Kalman filter and Particle filter**
@@ -194,26 +190,31 @@ Car_leftTurn_Astar.py
 ```
 In this example, Car status is 3D (x, y, orientation). Thus the value matrix and policy matrix also need to be 3D. The final policy of the path is 2D, which should be extract from the 3D policy. Again, A* search only work for deterministic case. 
 
-Example output:
+Example output (Astar):
 ```
+Cost: cost = [2, 1, 20] (right, forward, left)
+Value
+[999, 999, 999, 999, 999, 999]
+[51, 53, 999, 25, 24, 4]
+[49, 48, 47, 45, 999, 3]
+[999, 56, 999, 999, 999, 2]
+[999, 57, 77, 78, 999, 0]
 Policy:
-[' ', ' ', ' ', 'R', '#', 'R']
-[' ', ' ', ' ', '#', ' ', '#']
-['*', '#', '#', '#', '#', 'R']
-[' ', ' ', ' ', '#', ' ', ' ']
-[' ', ' ', ' ', '#', ' ', ' ']
-Value:
-[999, 999, 999, 12, 10, 9]
-[999, 999, 999, 13, 999, 7]
-[0, 1, 2, 3, 4, 6]
-[999, 999, 999, 15, 999, 999]
-[999, 999, 999, 16, 999, 999]
+[' ', ' ', ' ', ' ', ' ', ' ']
+['R', 'R', ' ', 'L', '#', 'L']
+['R', '#', '#', 'R', ' ', '#']
+[' ', '#', ' ', ' ', ' ', '#']
+[' ', 'L', '#', '*', ' ', 'R']
 Grid:
-[1, 1, 1, 0, 0, 0]
-[1, 1, 1, 0, 1, 0]
-[0, 0, 0, 0, 0, 0]
-[1, 1, 1, 0, 1, 1]
-[1, 1, 1, 0, 1, 1]
+[0, 0, 0, 0, 1, 1]
+[0, 0, 1, 0, 0, 0]
+[0, 0, 0, 0, 1, 0]
+[0, 0, 1, 1, 1, 0]
+[0, 0, 0, 0, 1, 0]
+Initial status
+[4, 5, 1]
+Goal location
+[4, 3]
 ```
 
 
